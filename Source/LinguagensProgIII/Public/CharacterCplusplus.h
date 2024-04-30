@@ -33,8 +33,11 @@ private:
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);
-	void Jump();
+	void CheckJump();
 	void Interact();
+
+	UPROPERTY()
+	bool jumping;
 
 	UPROPERTY(EditAnywhere)
 	float InteractLineTraceLength = 350.f;

@@ -9,6 +9,7 @@ ACharacterCplusplus::ACharacterCplusplus()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+    jumping = false;
 }
 
 // Called when the game starts or when spawned
@@ -23,6 +24,10 @@ void ACharacterCplusplus::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+    if (jumping)
+    {
+        Jump();
+    }
 }
 
 // Called to bind functionality to input
@@ -37,7 +42,8 @@ void ACharacterCplusplus::SetupPlayerInputComponent(UInputComponent* PlayerInput
     PlayerInputComponent->BindAxis("MoveRight", this, &ACharacterCplusplus::MoveRight);
 
     // Bind jump input
-    PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacterCplusplus::Jump);
+    PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacterCplusplus::CheckJump);
+    PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacterCplusplus::CheckJump);
 
     PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACharacterCplusplus::Interact);
 }
@@ -66,9 +72,16 @@ void ACharacterCplusplus::MoveRight(float Value)
 
 
 // Start character jump
-void ACharacterCplusplus::Jump()
+void ACharacterCplusplus::CheckJump()
 {
-    Jump();
+    if (jumping)
+    {
+        jumping = false;
+    }
+    else
+    {
+        jumping = true;
+    }
 }
 
 void ACharacterCplusplus::Interact()
