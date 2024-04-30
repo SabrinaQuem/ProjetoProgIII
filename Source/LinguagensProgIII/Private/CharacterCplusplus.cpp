@@ -2,6 +2,7 @@
 
 
 #include "CharacterCplusplus.h"
+#include "Components/CapsuleComponent.h"
 #include "Engine/Engine.h"
 #include "InterfaceFinalC.h"
 
@@ -19,6 +20,8 @@ void ACharacterCplusplus::BeginPlay()
 {
 	Super::BeginPlay();
 	
+    GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ACharacterCplusplus::OverlapBegin);
+    GetCapsuleComponent()->OnComponentEndOverlap.AddDynamic(this, &ACharacterCplusplus::OverlapEnd);
 }
 
 // Called every frame
@@ -60,7 +63,7 @@ void ACharacterCplusplus::OverlapBegin(UPrimitiveComponent* OverlappedComponent,
 
 void ACharacterCplusplus::OverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-
+    Other = nullptr;
 }
 
 // Move the character forward/backward
