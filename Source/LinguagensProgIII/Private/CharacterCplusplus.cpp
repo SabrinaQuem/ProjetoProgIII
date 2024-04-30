@@ -48,6 +48,19 @@ void ACharacterCplusplus::SetupPlayerInputComponent(UInputComponent* PlayerInput
     PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACharacterCplusplus::Interact);
 }
 
+//void ACharacterCplusplus::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+//{
+    //if (OtherActor->GetClass()->ImplementsInterface(UInterfaceInteract::StaticClass()))
+    //{
+    //    Interact();
+   // }
+//}
+
+//void ACharacterCplusplus::OverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+//{
+
+//}
+
 // Move the character forward/backward
 void ACharacterCplusplus::MoveForward(float Value)
 {
